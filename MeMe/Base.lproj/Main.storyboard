@@ -37,6 +37,20 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
+                            <textField opaque="NO" contentMode="center" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Aru-8n-2A3">
+                                <rect key="frame" x="159" y="106" width="97" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="center" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wgt-qO-4n5">
+                                <rect key="frame" x="136" y="746" width="143" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -49,8 +63,10 @@
                     </view>
                     <connections>
                         <outlet property="albumButton" destination="Gjf-MW-0A5" id="3xS-rJ-Dpy"/>
+                        <outlet property="bottomText" destination="wgt-qO-4n5" id="cHt-uy-SZt"/>
                         <outlet property="cameraButton" destination="9L2-XW-1up" id="TMo-fq-2Rm"/>
                         <outlet property="imagePickerView" destination="Jkc-zC-HAg" id="FAF-FL-gvA"/>
+                        <outlet property="topText" destination="Aru-8n-2A3" id="tI3-dZ-Klp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

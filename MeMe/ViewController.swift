@@ -18,9 +18,17 @@ UINavigationControllerDelegate {
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var albumButton: UIBarButtonItem!
     
+    @IBOutlet weak var topText: UITextField!
+    @IBOutlet weak var bottomText: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        topText.text = "TOP"
+        bottomText.text = "BOTTOM"
+        
+        topText.textAlignment = NSTextAlignment.center
+        bottomText.textAlignment = NSTextAlignment.center 
     }
     
     override func viewWillAppear(_ animated: Bool) {

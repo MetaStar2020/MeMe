@@ -30,6 +30,8 @@ UINavigationControllerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        //topText.becomeFirstResponder()
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         subscribeToKeyboardNotifications()
     }
@@ -39,15 +41,15 @@ UINavigationControllerDelegate {
         unsubscribeFromKeyboardNotifications()
     }
     
-   /* func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
         return true
-    } */
+    }
     
     // MARK: Keyboard Settings
     @objc func keyboardWillShow(_ notification: Notification) {
         
-        if bottomText.isEditing, view.frame.origin.y == 0 {
+        if bottomText.isEditing && view.frame.origin.y == 0 {
             view.frame.origin.y -= getKeyboardHeight(notification)
         }
         
@@ -55,7 +57,7 @@ UINavigationControllerDelegate {
     
     @objc func keyboardWillHide(_ notification: Notification) {
         
-         if bottomText.isEditing, view.frame.origin.y != 0 {
+        if bottomText.isEditing && view.frame.origin.y != 0 {
              view.frame.origin.y = 0
         }
     }

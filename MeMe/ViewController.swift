@@ -41,10 +41,14 @@ UINavigationControllerDelegate {
         unsubscribeFromKeyboardNotifications()
     }
     
-   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    @IBAction func keyboardResign(sender: AnyObject) {
+        sender.resignFirstResponder()
+    }
+    
+    /*func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return true
-    }
+    }*/
     
     // MARK: Keyboard Settings
     @objc func keyboardWillShow(_ notification: Notification) {

@@ -41,11 +41,17 @@
                                 <rect key="frame" x="189" y="104" width="36" height="49"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                <connections>
+                                    <action selector="keyboardResign:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="4OL-s4-0va"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="wgt-qO-4n5">
                                 <rect key="frame" x="189" y="709" width="36" height="49"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                <connections>
+                                    <action selector="keyboardResign:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="pT0-MR-9Xd"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 
 class ViewController:  UIViewController, UIImagePickerControllerDelegate,
-UINavigationControllerDelegate {
+UINavigationControllerDelegate, UITextFieldDelegate {
     
     // MARK: - Variables
     
@@ -21,9 +21,20 @@ UINavigationControllerDelegate {
     @IBOutlet weak var topText: UITextField!
     @IBOutlet weak var bottomText: UITextField!
     
+    weak var memedImage: UIImage!
+    
+    struct Meme {
+        var topText: String!
+        var bottomText: String!
+        var originalImage: UIImage!
+        var memedImage: UIImage
+    }
+    
     // MARK: - Views Control
     override func viewDidLoad() {
         super.viewDidLoad()
+        topText.delegate = self
+        bottomText.delegate = self
         setDefaultText()
         
     }
@@ -41,8 +52,9 @@ UINavigationControllerDelegate {
         unsubscribeFromKeyboardNotifications()
     }
     
-    @IBAction func keyboardResign(sender: AnyObject) {
-        sender.resignFirstResponder()
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true;
     }
     
     /*func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -89,15 +101,17 @@ UINavigationControllerDelegate {
         
         topText.text = "TOP"
         topText.textAlignment = NSTextAlignment.center
+        topText.backgroundColor = UIColor.clear
                
         bottomText.text = "BOTTOM"
         bottomText.textAlignment = NSTextAlignment.center
+        bottomText.backgroundColor = UIColor.clear
         
         let memeTextAttributes: [NSAttributedString.Key: Any] = [
             NSAttributedString.Key.strokeColor: UIColor.black,
             NSAttributedString.Key.foregroundColor: UIColor.white,
             NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-            NSAttributedString.Key.strokeWidth: 2.0
+            NSAttributedString.Key.strokeWidth: -3.0,
         ]
         
        topText.defaultTextAttributes = memeTextAttributes
@@ -136,5 +150,29 @@ UINavigationControllerDelegate {
         
         present(imagePicker, animated: true, completion: nil)
     }
+    // MARK: - Memory Functions
+    func save() {
+        //Generate memedImage
+        memedImage = generateMemedImage()
+        
+        // Create the meme
+            let meme = Meme(topText: topText.text!, bottomText: bottomText.text!, originalImage: imagePickerView.image!, memedImage: memedImage)
+    }
+    
+    func generateMemedImage() -> UIImage {
+
+        // TODO: Hide toolbar and navbar
+
+        // Render view to an image
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
+        let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+
+        // TODO: Show toolbar and navbar
+
+        return memedImage
+    }
+    
 }
 

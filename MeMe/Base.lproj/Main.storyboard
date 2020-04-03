@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
@@ -19,12 +19,27 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jkc-zC-HAg">
                                 <rect key="frame" x="0.0" y="44" width="414" height="808"/>
                             </imageView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="xau-MA-Tte">
+                            <textField opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="wgt-qO-4n5">
+                                <rect key="frame" x="191" y="769" width="32" height="34"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="11"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            </textField>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5kn-p5-RdX" userLabel="Top Toolbar">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <barButtonItem systemItem="action" id="PWd-rD-vaz"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="QjR-nh-6wF"/>
+                                    <barButtonItem systemItem="cancel" id="r6E-hb-Ir7"/>
+                                </items>
+                            </toolbar>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="xau-MA-Tte" userLabel="Bottom Toolbar">
                                 <rect key="frame" x="0.0" y="818" width="414" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="7fX-fu-3g7"/>
                                 </constraints>
                                 <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="MeE-9f-cJn"/>
                                     <barButtonItem style="plain" systemItem="camera" id="9L2-XW-1up" userLabel="cameraButton">
                                         <connections>
                                             <action selector="pickAnImageFromCamera:" destination="BYZ-38-t0r" id="cb6-2M-Igs"/>
@@ -35,38 +50,31 @@
                                             <action selector="pickAnImageFromAlbum:" destination="BYZ-38-t0r" id="Zc7-NU-Xpo"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="8oE-5W-eoB"/>
                                 </items>
                             </toolbar>
-                            <textField opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Aru-8n-2A3">
-                                <rect key="frame" x="189" y="104" width="36" height="49"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                            <textField contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" clearsOnBeginEditing="YES" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Aru-8n-2A3">
+                                <rect key="frame" x="191" y="109" width="32" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
-                                <connections>
-                                    <action selector="keyboardResign:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="4OL-s4-0va"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="wgt-qO-4n5">
-                                <rect key="frame" x="189" y="709" width="36" height="49"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
-                                <connections>
-                                    <action selector="keyboardResign:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="pT0-MR-9Xd"/>
-                                </connections>
                             </textField>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Jkc-zC-HAg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="24m-h1-r2N"/>
+                            <constraint firstItem="Aru-8n-2A3" firstAttribute="top" secondItem="5kn-p5-RdX" secondAttribute="bottom" constant="21" id="Ade-4X-zPq"/>
+                            <constraint firstItem="5kn-p5-RdX" firstAttribute="trailing" secondItem="Jkc-zC-HAg" secondAttribute="trailing" id="Pri-nO-Erj"/>
                             <constraint firstItem="xau-MA-Tte" firstAttribute="trailing" secondItem="Jkc-zC-HAg" secondAttribute="trailing" id="ROa-as-rKw"/>
                             <constraint firstItem="Jkc-zC-HAg" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="T7C-4Z-abd"/>
+                            <constraint firstItem="5kn-p5-RdX" firstAttribute="leading" secondItem="Jkc-zC-HAg" secondAttribute="leading" id="ZYU-KR-7QP"/>
                             <constraint firstItem="xau-MA-Tte" firstAttribute="centerX" secondItem="Aru-8n-2A3" secondAttribute="centerX" id="bxB-xt-0w3"/>
                             <constraint firstItem="xau-MA-Tte" firstAttribute="centerX" secondItem="wgt-qO-4n5" secondAttribute="centerX" id="daA-6Y-tyZ"/>
                             <constraint firstItem="Jkc-zC-HAg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="daX-ka-dy7" userLabel="Image Picker View.top = Safe Area.top"/>
                             <constraint firstItem="xau-MA-Tte" firstAttribute="leading" secondItem="Jkc-zC-HAg" secondAttribute="leading" id="fze-KI-Ahr"/>
                             <constraint firstItem="Jkc-zC-HAg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="j1v-Lp-XjH" userLabel="Image Picker View.leading = Safe Area.leading"/>
-                            <constraint firstItem="xau-MA-Tte" firstAttribute="top" secondItem="wgt-qO-4n5" secondAttribute="bottom" constant="60" id="jFI-tC-C9G"/>
+                            <constraint firstItem="xau-MA-Tte" firstAttribute="top" secondItem="wgt-qO-4n5" secondAttribute="bottom" constant="15" id="jFI-tC-C9G"/>
                             <constraint firstItem="xau-MA-Tte" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="oCv-l6-8sq"/>
-                            <constraint firstItem="Aru-8n-2A3" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="60" id="wzE-Ya-aPy"/>
+                            <constraint firstItem="5kn-p5-RdX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="wtJ-G6-Qq9"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -80,7 +88,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="107" y="139"/>
+            <point key="canvasLocation" x="105.79710144927537" y="138.61607142857142"/>
         </scene>
     </scenes>
 </document>

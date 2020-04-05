@@ -5,6 +5,8 @@
 //  Created by Chantal Deguire on 2020-03-23.
 //  Copyright © 2020 Udacity. All rights reserved.
 //
+// Note: I chose not to use a navigation bar -- app uses a single view and presented subviews
+//
 
 import UIKit
 import AVFoundation
@@ -15,13 +17,17 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     // MARK: - Variables
     
     @IBOutlet weak var imagePickerView: UIImageView!
+    @IBOutlet weak var navBar: UIToolbar!
+    @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var albumButton: UIBarButtonItem!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
     
     @IBOutlet weak var topText: UITextField!
     @IBOutlet weak var bottomText: UITextField!
     
-    weak var memedImage: UIImage!
+    //weak var memedImage: UIImage!
     
     struct Meme {
         var topText: String!
@@ -33,6 +39,7 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     // MARK: - Views Control
     override func viewDidLoad() {
         super.viewDidLoad()
+        shareButton.isEnabled = false
         topText.delegate = self
         bottomText.delegate = self
         setDefaultText()
@@ -62,7 +69,7 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         return true
     }*/
     
-    // MARK: Keyboard Settings
+    // MARK: - Keyboard Settings
     @objc func keyboardWillShow(_ notification: Notification) {
         
         if bottomText.isEditing && view.frame.origin.y == 0 {
@@ -125,6 +132,7 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             imagePickerView.contentMode = .scaleAspectFit
             imagePickerView.image = pickedImage
+            shareButton.isEnabled = true
         }
         
         dismiss(animated: true, completion: nil)
@@ -150,26 +158,57 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         
         present(imagePicker, animated: true, completion: nil)
     }
+    
+    // MARK: - Share and Cancel Button Actions
+    @IBAction func shareCurrentPhoto(_ sender: Any) {
+        //Generate memedImage
+       let sharedImage = generateMemedImage()
+        
+        //present an ActivityViewController
+        let activityView = UIActivityViewController(activityItems: [sharedImage], applicationActivities: nil)
+                present(activityView, animated: true)
+        
+        //Completion Handler - saving
+        activityView.completionWithItemsHandler = { activity, completed, items, error in
+            if completed {
+                print("share completed")
+                self.save()
+                return
+            } else {
+                print("cancel")
+            }
+            if let shareError = error {
+                print("error while sharing: \(shareError.localizedDescription)")
+            }
+        }
+        
+    }
+    @IBAction func cancelCurrentMeme(_ sender: Any) {
+        // TO DO: return to default settings (no images and custom texts)
+    }
+    
     // MARK: - Memory Functions
     func save() {
-        //Generate memedImage
-        memedImage = generateMemedImage()
         
         // Create the meme
-            let meme = Meme(topText: topText.text!, bottomText: bottomText.text!, originalImage: imagePickerView.image!, memedImage: memedImage)
+        _ = Meme(topText: topText.text!, bottomText: bottomText.text!, originalImage: imagePickerView.image!, memedImage: generateMemedImage())
     }
     
     func generateMemedImage() -> UIImage {
 
-        // TODO: Hide toolbar and navbar
+        // Hide toolbar and navbar
+        self.toolBar.isHidden = true
+        self.navBar.isHidden = true
 
         // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
         view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
-        let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        let memedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
 
-        // TODO: Show toolbar and navbar
+        // Show toolbar and navbar
+        self.toolBar.isHidden = false
+        self.navBar.isHidden = false
 
         return memedImage
     }

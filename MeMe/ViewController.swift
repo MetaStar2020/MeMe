@@ -5,7 +5,7 @@
 //  Created by Chantal Deguire on 2020-03-23.
 //  Copyright © 2020 Udacity. All rights reserved.
 //
-// Note: I chose not to use a navigation bar -- app uses a single view and presented subviews
+// Note: There's no need for a navigation bar -- app uses a single view and presented subviews
 //
 
 import UIKit
@@ -26,8 +26,6 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var topText: UITextField!
     @IBOutlet weak var bottomText: UITextField!
-    
-    //weak var memedImage: UIImage!
     
     struct Meme {
         var topText: String!
@@ -63,11 +61,6 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         textField.resignFirstResponder()
         return true;
     }
-    
-    /*func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return true
-    }*/
     
     // MARK: - Keyboard Settings
     @objc func keyboardWillShow(_ notification: Notification) {
@@ -106,14 +99,7 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     // MARK: - Setting Default Texts
     func setDefaultText() {
         
-        topText.text = "TOP"
-        topText.textAlignment = NSTextAlignment.center
-        topText.backgroundColor = UIColor.clear
-               
-        bottomText.text = "BOTTOM"
-        bottomText.textAlignment = NSTextAlignment.center
-        bottomText.backgroundColor = UIColor.clear
-        
+       //Set NSAttributes
         let memeTextAttributes: [NSAttributedString.Key: Any] = [
             NSAttributedString.Key.strokeColor: UIColor.black,
             NSAttributedString.Key.foregroundColor: UIColor.white,
@@ -121,16 +107,27 @@ UINavigationControllerDelegate, UITextFieldDelegate {
             NSAttributedString.Key.strokeWidth: -3.0,
         ]
         
-       topText.defaultTextAttributes = memeTextAttributes
-       bottomText.defaultTextAttributes = memeTextAttributes
-
+        topText.defaultTextAttributes = memeTextAttributes
+        bottomText.defaultTextAttributes = memeTextAttributes
+        
+        //Set Other Attributes
+        topText.textAlignment = NSTextAlignment.center
+        topText.backgroundColor = UIColor.clear
+        topText.adjustsFontSizeToFitWidth = true
+        topText.text = "TOP"
+        
+        bottomText.textAlignment = NSTextAlignment.center
+        bottomText.backgroundColor = UIColor.clear
+        bottomText.adjustsFontSizeToFitWidth = true
+        bottomText.text = "BOTTOM"
+        
     }
     
     
     // MARK: - UIImagePickerControllerDelegate Methods
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            imagePickerView.contentMode = .scaleAspectFit
+            imagePickerView.contentMode = .scaleAspectFill // ..Fill replaced ..Fit - looks better!
             imagePickerView.image = pickedImage
             shareButton.isEnabled = true
         }
@@ -147,11 +144,11 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
+        
         present(imagePicker, animated: true, completion: nil)
     }
     
     @IBAction func pickAnImageFromCamera(_ sender: Any) {
-        
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = .camera
@@ -184,7 +181,9 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         
     }
     @IBAction func cancelCurrentMeme(_ sender: Any) {
-        // TO DO: return to default settings (no images and custom texts)
+        // Resetting to default settings (no images and revert to custom texts)
+        self.setDefaultText()
+        imagePickerView.image = nil
     }
     
     // MARK: - Memory Functions

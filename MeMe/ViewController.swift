@@ -14,7 +14,7 @@ import AVFoundation
 class ViewController:  UIViewController, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate, UITextFieldDelegate {
     
-    // MARK: - Variables
+    // MARK: - Variables and Constants
     
     @IBOutlet weak var imagePickerView: UIImageView!
     @IBOutlet weak var navBar: UIToolbar!
@@ -27,20 +27,24 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     @IBOutlet weak var topText: UITextField!
     @IBOutlet weak var bottomText: UITextField!
     
-    struct Meme {
-        var topText: String!
-        var bottomText: String!
-        var originalImage: UIImage!
-        var memedImage: UIImage
-    }
+    //Set NSAttributes
+    let memeTextAttributes: [NSAttributedString.Key: Any] = [
+        NSAttributedString.Key.strokeColor: UIColor.black,
+        NSAttributedString.Key.foregroundColor: UIColor.white,
+        NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+        NSAttributedString.Key.strokeWidth: -3.0,
+    ]
+    
+    //Constants
+    let topDefaultFieldText: String = "TOP"
+    let bottomDefaultFieldText: String = "BOTTOM"
     
     // MARK: - Views Control
     override func viewDidLoad() {
         super.viewDidLoad()
         shareButton.isEnabled = false
-        topText.delegate = self
-        bottomText.delegate = self
-        setDefaultText()
+        setTextStyle(topText, topDefaultFieldText)
+        setTextStyle(bottomText, bottomDefaultFieldText)
         
     }
     
@@ -97,37 +101,21 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     }
     
     // MARK: - Setting Default Texts
-    func setDefaultText() {
-        
-       //Set NSAttributes
-        let memeTextAttributes: [NSAttributedString.Key: Any] = [
-            NSAttributedString.Key.strokeColor: UIColor.black,
-            NSAttributedString.Key.foregroundColor: UIColor.white,
-            NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-            NSAttributedString.Key.strokeWidth: -3.0,
-        ]
-        
-        topText.defaultTextAttributes = memeTextAttributes
-        bottomText.defaultTextAttributes = memeTextAttributes
-        
-        //Set Other Attributes
-        topText.textAlignment = NSTextAlignment.center
-        topText.backgroundColor = UIColor.clear
-        topText.adjustsFontSizeToFitWidth = true
-        topText.text = "TOP"
-        
-        bottomText.textAlignment = NSTextAlignment.center
-        bottomText.backgroundColor = UIColor.clear
-        bottomText.adjustsFontSizeToFitWidth = true
-        bottomText.text = "BOTTOM"
-        
+ 
+    func setTextStyle(_ textField: UITextField, _ defaultText: String) {
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.textAlignment = NSTextAlignment.center
+        textField.backgroundColor = UIColor.clear
+        textField.delegate = self
+        textField.adjustsFontSizeToFitWidth = true
+        textField.text = defaultText
     }
     
     
     // MARK: - UIImagePickerControllerDelegate Methods
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            imagePickerView.contentMode = .scaleAspectFill // ..Fill replaced ..Fit - looks better!
+            imagePickerView.contentMode = .scaleAspectFit
             imagePickerView.image = pickedImage
             shareButton.isEnabled = true
         }
@@ -141,17 +129,17 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     
     // MARK: - UIImagePickerController Actions
     @IBAction func pickAnImageFromAlbum(_ sender: Any) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .photoLibrary
-        
-        present(imagePicker, animated: true, completion: nil)
+        pickFromSource(.photoLibrary)
     }
     
     @IBAction func pickAnImageFromCamera(_ sender: Any) {
+        pickFromSource(.camera)
+    }
+    
+    func pickFromSource(_ source: UIImagePickerController.SourceType) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        imagePicker.sourceType = .camera
+        imagePicker.sourceType = source
         
         present(imagePicker, animated: true, completion: nil)
     }
@@ -168,21 +156,32 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         //Completion Handler - saving
         activityView.completionWithItemsHandler = { activity, completed, items, error in
             if completed {
-                print("share completed")
+                showAlert("MemeMe", "share completed")
                 self.save()
                 return
             } else {
-                print("cancel")
+                showAlert("MemeMe", "share cancelled")
             }
             if let shareError = error {
-                print("error while sharing: \(shareError.localizedDescription)")
+                showAlert("MemeMe", "error while sharing: \(shareError.localizedDescription)")
             }
         }
+        
+        //Set up Alerts
+        func showAlert(_ alertTitle: String, _ alertMessage: String) {
+            let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+
+            self.present(alert, animated: true)
+        }
+        
         
     }
     @IBAction func cancelCurrentMeme(_ sender: Any) {
         // Resetting to default settings (no images and revert to custom texts)
-        self.setDefaultText()
+        self.setTextStyle(topText, topDefaultFieldText)
+        self.setTextStyle(bottomText, bottomDefaultFieldText)
         imagePickerView.image = nil
     }
     

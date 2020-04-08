@@ -12,6 +12,7 @@
 		C010C334242936C900507013 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C010C332242936C900507013 /* Main.storyboard */; };
 		C010C336242936CA00507013 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C010C335242936CA00507013 /* Assets.xcassets */; };
 		C010C339242936CA00507013 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C010C337242936CA00507013 /* LaunchScreen.storyboard */; };
+		C034AA7B243D512D00F06634 /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034AA7A243D512D00F06634 /* Meme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		C010C335242936CA00507013 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C010C338242936CA00507013 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C010C33A242936CA00507013 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C034AA7A243D512D00F06634 /* Meme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 				C010C32E242936C900507013 /* AppDelegate.swift */,
 				C010C330242936C900507013 /* ViewController.swift */,
 				C010C332242936C900507013 /* Main.storyboard */,
+				C034AA7A243D512D00F06634 /* Meme.swift */,
 				C010C335242936CA00507013 /* Assets.xcassets */,
 				C010C337242936CA00507013 /* LaunchScreen.storyboard */,
 				C010C33A242936CA00507013 /* Info.plist */,
@@ -135,6 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C034AA7B243D512D00F06634 /* Meme.swift in Sources */,
 				C010C331242936C900507013 /* ViewController.swift in Sources */,
 				C010C32F242936C900507013 /* AppDelegate.swift in Sources */,
 			);

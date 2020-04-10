@@ -8,6 +8,7 @@
 // Note: There's no need for a navigation bar -- app uses a single view and presented subviews
 //
 
+
 import UIKit
 import AVFoundation
 
@@ -65,6 +66,16 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         textField.resignFirstResponder()
         return true;
     }
+    
+    // MARK: - Navigation
+    
+       override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+           // Get the new view controller using segue.destination.
+        let destVC : SentMemesVC = segue.destination as! SentMemesVC
+           // Pass the selected object to the new view controller. -- IMPLEMENTATION NEEDED!
+        
+       }
+       
     
     // MARK: - Keyboard Settings
     @objc func keyboardWillShow(_ notification: Notification) {
@@ -151,7 +162,7 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         
         //present an ActivityViewController
         let activityView = UIActivityViewController(activityItems: [sharedImage], applicationActivities: nil)
-                present(activityView, animated: true)
+            present(activityView, animated: true)
         
         //Completion Handler - saving
         activityView.completionWithItemsHandler = { activity, completed, items, error in
@@ -172,17 +183,15 @@ UINavigationControllerDelegate, UITextFieldDelegate {
             let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
 
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-
-            self.present(alert, animated: true)
-        }
-        
-        
+               
+            //self.present(alert, animated: true)
+            UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+            }
     }
     @IBAction func cancelCurrentMeme(_ sender: Any) {
-        // Resetting to default settings (no images and revert to custom texts)
-        self.setTextStyle(topText, topDefaultFieldText)
-        self.setTextStyle(bottomText, bottomDefaultFieldText)
+        // Removing current image and return to Sent Memes
         imagePickerView.image = nil
+        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Memory Functions

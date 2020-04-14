@@ -69,12 +69,12 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     
     // MARK: - Navigation
     
-       override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+       /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
            // Get the new view controller using segue.destination.
         let destVC : SentMemesVC = segue.destination as! SentMemesVC
            // Pass the selected object to the new view controller. -- IMPLEMENTATION NEEDED!
-        
-       }
+        destVC.delegate = self
+       }*/
        
     
     // MARK: - Keyboard Settings
@@ -198,7 +198,12 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     func save() {
         
         // Create the meme
-        _ = Meme(topText: topText.text!, bottomText: bottomText.text!, originalImage: imagePickerView.image!, memedImage: generateMemedImage())
+        let meme = Meme(topText: topText.text!, bottomText: bottomText.text!, originalImage: imagePickerView.image!, memedImage: generateMemedImage())
+        
+        //Add to the memes array in AppDelegate
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        appDelegate.memes.append(meme)
     }
     
     func generateMemedImage() -> UIImage {

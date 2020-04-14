@@ -9,6 +9,8 @@
 import UIKit
 
 class SentMemesVC: UIViewController {
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()

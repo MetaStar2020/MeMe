@@ -15,7 +15,7 @@ import AVFoundation
 class ViewController:  UIViewController, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate, UITextFieldDelegate {
     
-    // MARK: - Variables and Constants
+    // MARK: - Outlets
     
     @IBOutlet weak var imagePickerView: UIImageView!
     @IBOutlet weak var navBar: UIToolbar!
@@ -27,6 +27,8 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var topText: UITextField!
     @IBOutlet weak var bottomText: UITextField!
+ 
+    // MARK: - Properties: Variables and Constants
     
     //Set NSAttributes
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
@@ -40,7 +42,7 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     let topDefaultFieldText: String = "TOP"
     let bottomDefaultFieldText: String = "BOTTOM"
     
-    // MARK: - Views Control
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         shareButton.isEnabled = false
@@ -167,8 +169,8 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         //Completion Handler - saving
         activityView.completionWithItemsHandler = { activity, completed, items, error in
             if completed {
-                showAlert("MemeMe", "share completed")
                 self.save()
+                showAlert("MemeMe", "share completed")
                 return
             } else {
                 showAlert("MemeMe", "share cancelled")
@@ -182,10 +184,10 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         func showAlert(_ alertTitle: String, _ alertMessage: String) {
             let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
 
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-               
-            //self.present(alert, animated: true)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler:  nil ))
             UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+            
+            UIApplication.shared.keyWindow?.rootViewController?.viewWillAppear(true)
             }
     }
     @IBAction func cancelCurrentMeme(_ sender: Any) {

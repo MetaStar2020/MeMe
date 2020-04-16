@@ -10,7 +10,7 @@ import UIKit
 
 class MemeTableViewController: UITableViewController {
     
-    //MARK: - Properties
+    //MARK: - Properties: Variables and Constants
     
     let memeCellID = "MemesTableCell"
     
@@ -21,7 +21,7 @@ class MemeTableViewController: UITableViewController {
         return appDelegate.memes
     }
     
-    // MARK: - Views Control
+    // MARK: - View Life Cycle
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -45,9 +45,6 @@ class MemeTableViewController: UITableViewController {
        // Configure the cell’s contents.
         cell.imageView!.image = self.memes[indexPath.row].memedImage
         cell.textLabel!.text = self.memes[indexPath.row].topText + "..." + self.memes[indexPath.row].bottomText
-        
-        /*****   NEED TO IMPLEMENT:  textLabel! constraints...  and the memedImage needs to appear*/
-
            
        return cell
     }

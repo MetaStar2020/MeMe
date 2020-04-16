@@ -11,7 +11,7 @@ import UIKit
 class SentMemesVC: UIViewController {
     
     
-
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 

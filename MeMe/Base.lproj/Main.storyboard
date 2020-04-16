@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -109,7 +110,7 @@
         <!--Sent Memes Collections-->
         <scene sceneID="z9k-ly-Wif">
             <objects>
-                <viewController title="Sent Memes Collections" id="7jh-4a-AjB" customClass="SentMemesVC" customModule="MeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Sent Memes Collections" id="7jh-4a-AjB" customClass="MemeCollectionViewController" customModule="MeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1rL-FW-47x">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -121,8 +122,48 @@
                                     <barButtonItem title="Item" id="Ryo-cE-jux" userLabel="Collections"/>
                                 </items>
                             </toolbar>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cah-DU-vEO">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="j7O-9r-eks">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MemeCollectionViewCell" id="1TO-Zq-ivi" customClass="MemeCollectionViewCell" customModule="MeMe" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="tr0-A1-btj" customClass="MemeCollectionViewCell" customModule="MeMe" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EK7-FT-6iC">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="EK7-FT-6iC" firstAttribute="leading" secondItem="tr0-A1-btj" secondAttribute="leading" id="Aeo-Zj-Ofb"/>
+                                                <constraint firstItem="EK7-FT-6iC" firstAttribute="top" secondItem="tr0-A1-btj" secondAttribute="top" id="Pvo-ob-Ncu"/>
+                                                <constraint firstItem="EK7-FT-6iC" firstAttribute="centerY" secondItem="tr0-A1-btj" secondAttribute="centerY" id="RE9-ZE-MFt"/>
+                                                <constraint firstItem="EK7-FT-6iC" firstAttribute="centerX" secondItem="tr0-A1-btj" secondAttribute="centerX" id="cJj-K7-FBB"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="collectionImageView" destination="EK7-FT-6iC" id="hwP-pu-WNq"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="cah-DU-vEO" firstAttribute="leading" secondItem="1rL-FW-47x" secondAttribute="leading" id="Mnu-OI-pER"/>
+                            <constraint firstAttribute="bottom" secondItem="cah-DU-vEO" secondAttribute="bottom" id="SK7-3T-jEm"/>
+                            <constraint firstAttribute="trailing" secondItem="cah-DU-vEO" secondAttribute="trailing" id="Tmq-i0-fpT"/>
+                            <constraint firstItem="cah-DU-vEO" firstAttribute="top" secondItem="1rL-FW-47x" secondAttribute="top" id="zAj-Bd-ynP"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="TpB-5Q-FGd"/>
                     </view>
                     <navigationItem key="navigationItem" title="Sent Memes" id="nOV-Rz-6dd">
@@ -146,14 +187,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemesTableCell" textLabel="PHy-73-qdA" style="IBUITableViewCellStyleDefault" id="Pef-UW-OcO">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemesTableCell" textLabel="CEE-Q4-HsY" style="IBUITableViewCellStyleDefault" id="Pef-UW-OcO">
                                 <rect key="frame" x="0.0" y="28" width="414" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Pef-UW-OcO" id="WRW-QZ-IDF">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PHy-73-qdA">
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CEE-Q4-HsY">
                                             <rect key="frame" x="20" y="0.0" width="374" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -169,11 +210,17 @@
                             <outlet property="delegate" destination="K6w-Ed-Hx6" id="2tC-PX-phg"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Sent Memes" id="PWJ-Gq-3R8"/>
+                    <navigationItem key="navigationItem" title="Sent Memes" id="PWJ-Gq-3R8">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="HeU-LZ-Qtd" userLabel="Add">
+                            <connections>
+                                <segue destination="BYZ-38-t0r" kind="presentation" modalPresentationStyle="fullScreen" id="GV6-I2-vYr"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SnT-bM-nLs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1783" y="-698"/>
+            <point key="canvasLocation" x="1782.608695652174" y="-698.4375"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="XZI-LG-Hop">
@@ -235,4 +282,7 @@
         <image name="rectangle.grid.3x2.fill" catalog="system" width="64" height="50"/>
         <image name="table" catalog="system" width="64" height="46"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="V49-SR-dpp"/>
+    </inferredMetricsTieBreakers>
 </document>

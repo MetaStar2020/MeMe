@@ -155,6 +155,10 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="7jh-4a-AjB" id="nP1-Qb-UWH"/>
+                                    <outlet property="delegate" destination="7jh-4a-AjB" id="ywg-iD-0vu"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -173,6 +177,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="collectionView" destination="cah-DU-vEO" id="frt-7R-UKg"/>
+                        <outlet property="memeCollectionView" destination="cah-DU-vEO" id="YKh-gB-CSQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="joe-M0-7aK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -13,6 +13,7 @@ class MemeCollectionViewController: UICollectionViewController {
     // MARK: - Properties: Variables and Constants
     
     @IBOutlet weak var memeCollectionView: UICollectionView!
+    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
     let memeCollectionCellID = "MemeCollectionViewCell"
     
@@ -26,6 +27,14 @@ class MemeCollectionViewController: UICollectionViewController {
     
      override func viewDidLoad() {
            super.viewDidLoad()
+        
+        let space:CGFloat = 3.0
+        let widthDimension = (view.frame.size.width - (2 * space)) / 3.0
+        let heightDimension = (view.frame.size.height - (2 * space)) / 3.0
+
+        flowLayout.minimumInteritemSpacing = space
+        flowLayout.minimumLineSpacing = space
+        flowLayout.itemSize = CGSize(width: widthDimension, height: heightDimension)
        }
      
      override func viewWillAppear(_ animated: Bool) {
@@ -48,19 +57,35 @@ class MemeCollectionViewController: UICollectionViewController {
          print(indexPath)
         
         // Configure the cell’s contents.
-        cell.collectionImageView.image = self.memes[indexPath.row].memedImage
+        cell.collectionImageView.image = self.memes[indexPath.row].originalImage
             
         return cell
      }
     
-    /* as example for DetailView
+    // Prepare for Segue from selected Item
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let meme = memes[(indexPath as NSIndexPath).row]
+           self.performSegue(withIdentifier: "segueTableVCtoDetailVC", sender: self)
+       }
+    // MARK: - Navigation
+
+          // In a storyboard-based application, you will often want to do a little preparation before navigation
+          override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+           if (segue.identifier == "segueTableVCtoDetailVC") {
+               let destVC: MemeDetailViewController = segue.destination as! MemeDetailViewController
+               let indexPath = self.memeCollectionView.indexPathsForSelectedItems[]
+               destVC.meme = self.memes[indexPath!.row]
+           }
+          }
+
+   
+/* Just to help implement later
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailedImage = memes[(indexPath as NSIndexPath).row]
         
-        let memeViewController = self.storyboard!.instantiateViewController(withIdentifier: "MemeViewController") as! MemeViewController
-        memeViewController.meme = meme
+        let memeDetailViewController = self.storyboard!.instantiateViewController(withIdentifier: "MemeDetailViewController") as! MemeDetailViewController
+        memeDetailViewController.meme = detailedImage
         
-        self.navigationController!.pushViewController(memeViewController, animated: true)
+        self.navigationController!.pushViewController(memeDetailViewController, animated: true)
     }*/
     
     

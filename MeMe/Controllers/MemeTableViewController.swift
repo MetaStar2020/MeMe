@@ -49,4 +49,31 @@ class MemeTableViewController: UITableViewController {
        return cell
     }
     
+    // Prepare for slected cell object
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+          self.performSegue(withIdentifier: "segueTableVCtoDetailVC", sender: self)
+    }
+    
+    // MARK: - Navigation
+
+       // In a storyboard-based application, you will often want to do a little preparation before navigation
+       override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "segueTableVCtoDetailVC") {
+            let destVC: MemeDetailViewController = segue.destination as! MemeDetailViewController
+            let indexPath = self.tableView.indexPathForSelectedRow
+            destVC.meme = self.memes[indexPath!.row]
+        }
+       }
+    
+    /* (just to help implement later) note Segue ID: segueTableVCtoDetailVC
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailedImage = memes[(indexPath as NSIndexPath).row]
+        
+        let memeDetailViewController = self.storyboard!.instantiateViewController(withIdentifier: "MemeDetailViewController") as! MemeDetailViewController
+        memeDetailViewController.meme = detailedImage
+        
+        self.navigationController!.pushViewController(memeDetailViewController, animated: true)
+        
+    }*/
+    
 }

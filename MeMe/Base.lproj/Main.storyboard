@@ -238,7 +238,7 @@
         <scene sceneID="XZI-LG-Hop">
             <objects>
                 <navigationController id="mcm-rC-umR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="list.dash" catalog="system" landscapeImage="table" id="4Ye-Xp-e7a"/>
+                    <tabBarItem key="tabBarItem" title="" image="table" id="4Ye-Xp-e7a"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8ht-Bg-rCA">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -273,7 +273,7 @@
         <scene sceneID="lHh-dl-GcN">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="d4y-Rv-4ht" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="rectangle.grid.3x2.fill" catalog="system" id="w3c-ji-yRk"/>
+                    <tabBarItem key="tabBarItem" title="" image="collectionIcon" id="w3c-ji-yRk"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nuw-ru-pES">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -290,12 +290,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="list.dash" catalog="system" width="64" height="42"/>
-        <image name="rectangle.grid.3x2.fill" catalog="system" width="64" height="50"/>
-        <image name="table" catalog="system" width="64" height="46"/>
+        <image name="collectionIcon" width="29.666666030883789" height="30"/>
+        <image name="table" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="llu-bW-qcs"/>
-        <segue reference="V49-SR-dpp"/>
+        <segue reference="yPu-3V-H8F"/>
+        <segue reference="GV6-I2-vYr"/>
     </inferredMetricsTieBreakers>
 </document>

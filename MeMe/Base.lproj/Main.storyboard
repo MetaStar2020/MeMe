@@ -151,6 +151,7 @@
                     <connections>
                         <outlet property="flowLayout" destination="5NH-HR-LVJ" id="TOc-Rw-1xF"/>
                         <outlet property="memeCollectionView" destination="qaH-pT-DSK" id="NdL-Jf-IRQ"/>
+                        <segue destination="oln-Mi-Ww8" kind="presentation" identifier="segueCollectionVCtoDetailVC" modalPresentationStyle="fullScreen" id="llu-bW-qcs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="joe-M0-7aK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -294,6 +295,7 @@
         <image name="table" catalog="system" width="64" height="46"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GV6-I2-vYr"/>
+        <segue reference="llu-bW-qcs"/>
+        <segue reference="V49-SR-dpp"/>
     </inferredMetricsTieBreakers>
 </document>

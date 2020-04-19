@@ -169,7 +169,7 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         //Completion Handler - saving
         activityView.completionWithItemsHandler = { activity, completed, items, error in
             if completed {
-                self.save()
+                self.save(memedImage: sharedImage)
                 showAlert("MemeMe", "share completed")
                 return
             } else {
@@ -197,10 +197,10 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     }
     
     // MARK: - Memory Functions
-    func save() {
+    func save(memedImage: UIImage) {
         
         // Create the meme
-        let meme = Meme(topText: topText.text!, bottomText: bottomText.text!, originalImage: imagePickerView.image!, memedImage: generateMemedImage())
+        let meme = Meme(topText: topText.text!, bottomText: bottomText.text!, originalImage: imagePickerView.image!, memedImage: memedImage)
         
         //Add to the memes array in AppDelegate
         let object = UIApplication.shared.delegate

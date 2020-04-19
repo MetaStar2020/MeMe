@@ -57,23 +57,23 @@ class MemeCollectionViewController: UICollectionViewController {
          print(indexPath)
         
         // Configure the cell’s contents.
-        cell.collectionImageView.image = self.memes[indexPath.row].originalImage
+        cell.collectionImageView.image = self.memes[indexPath.row].memedImage
             
         return cell
      }
     
     // Prepare for Segue from selected Item
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-           self.performSegue(withIdentifier: "segueTableVCtoDetailVC", sender: self)
+           self.performSegue(withIdentifier: "segueCollectionVCtoDetailVC", sender: self)
        }
     // MARK: - Navigation
 
           // In a storyboard-based application, you will often want to do a little preparation before navigation
           override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-           if (segue.identifier == "segueTableVCtoDetailVC") {
+           if (segue.identifier == "segueCollectionVCtoDetailVC") {
                let destVC: MemeDetailViewController = segue.destination as! MemeDetailViewController
-               let indexPath = self.memeCollectionView.indexPathsForSelectedItems[]
-               destVC.meme = self.memes[indexPath!.row]
+            let indexPath = self.memeCollectionView.indexPathsForSelectedItems?.first
+               destVC.currentMeme = self.memes[indexPath!.row]
            }
           }
 

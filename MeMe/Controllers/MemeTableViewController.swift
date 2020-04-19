@@ -61,7 +61,7 @@ class MemeTableViewController: UITableViewController {
         if (segue.identifier == "segueTableVCtoDetailVC") {
             let destVC: MemeDetailViewController = segue.destination as! MemeDetailViewController
             let indexPath = self.tableView.indexPathForSelectedRow
-            destVC.meme = self.memes[indexPath!.row]
+            destVC.currentMeme = self.memes[indexPath!.row]
         }
        }
     

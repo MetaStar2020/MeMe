@@ -31,7 +31,8 @@ class MemeCollectionViewController: UICollectionViewController {
         let space:CGFloat = 3.0
         let widthDimension = (view.frame.size.width - (2 * space)) / 3.0
         let heightDimension = (view.frame.size.height - (2 * space)) / 3.0
-
+        
+        //flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         flowLayout.minimumInteritemSpacing = space
         flowLayout.minimumLineSpacing = space
         flowLayout.itemSize = CGSize(width: widthDimension, height: heightDimension)
@@ -45,7 +46,7 @@ class MemeCollectionViewController: UICollectionViewController {
 
          // MARK: - Required functions for UITableViewDataSource
      
-     // Return the number of rows for the table.
+     // Return the number of rows for the collection.
      override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
          return self.memes.count
      }
@@ -57,7 +58,9 @@ class MemeCollectionViewController: UICollectionViewController {
          print(indexPath)
         
         // Configure the cell’s contents.
-        cell.collectionImageView.image = self.memes[indexPath.row].memedImage
+        cell.collectionImageView.image = self.memes[indexPath.row].originalImage
+        cell.topText.text = self.memes[indexPath.row].topText
+        cell.bottomText.text = self.memes[indexPath.row].bottomText
             
         return cell
      }

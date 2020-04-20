@@ -151,7 +151,7 @@
                     <connections>
                         <outlet property="flowLayout" destination="5NH-HR-LVJ" id="TOc-Rw-1xF"/>
                         <outlet property="memeCollectionView" destination="qaH-pT-DSK" id="NdL-Jf-IRQ"/>
-                        <segue destination="oln-Mi-Ww8" kind="presentation" identifier="segueCollectionVCtoDetailVC" modalPresentationStyle="fullScreen" id="llu-bW-qcs"/>
+                        <segue destination="oln-Mi-Ww8" kind="show" identifier="segueCollectionVCtoDetailVC" id="llu-bW-qcs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="joe-M0-7aK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -162,20 +162,20 @@
         <scene sceneID="eek-us-0Lg">
             <objects>
                 <tableViewController title="Sent Memes Table View" id="K6w-Ed-Hx6" customClass="MemeTableViewController" customModule="MeMe" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="TR9-1H-a2g">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="TR9-1H-a2g">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemesTableCell" textLabel="CEE-Q4-HsY" style="IBUITableViewCellStyleDefault" id="Pef-UW-OcO">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.666667938232422"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemesTableCell" textLabel="CEE-Q4-HsY" rowHeight="80" style="IBUITableViewCellStyleDefault" id="Pef-UW-OcO">
+                                <rect key="frame" x="0.0" y="28" width="414" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Pef-UW-OcO" id="WRW-QZ-IDF">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CEE-Q4-HsY">
-                                            <rect key="frame" x="20" y="0.0" width="374" height="43.666667938232422"/>
+                                            <rect key="frame" x="20" y="0.0" width="374" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -184,7 +184,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="oln-Mi-Ww8" kind="presentation" identifier="segueTableVCtoDetailVC" modalPresentationStyle="fullScreen" id="yPu-3V-H8F"/>
+                                    <segue destination="oln-Mi-Ww8" kind="show" identifier="segueTableVCtoDetailVC" id="yPu-3V-H8F"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -214,7 +214,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8lK-Nx-m1O">
-                                <rect key="frame" x="0.0" y="40" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="84" width="414" height="725"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -226,6 +226,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rrN-kV-aZ0"/>
                     </view>
+                    <navigationItem key="navigationItem" id="9z7-VT-5y3"/>
                     <connections>
                         <outlet property="detailedImageView" destination="8lK-Nx-m1O" id="JLO-uE-lLZ"/>
                     </connections>

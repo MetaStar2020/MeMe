@@ -188,9 +188,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="oln-Mi-Ww8" kind="show" identifier="segueTableVCtoDetailVC" id="yPu-3V-H8F"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -205,6 +202,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="oln-Mi-Ww8" kind="show" identifier="segueTableVCtoDetailVC" id="zf6-Tk-oyA"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SnT-bM-nLs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -300,7 +300,7 @@
         <image name="table" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="llu-bW-qcs"/>
-        <segue reference="V49-SR-dpp"/>
+        <segue reference="zf6-Tk-oyA"/>
+        <segue reference="GV6-I2-vYr"/>
     </inferredMetricsTieBreakers>
 </document>

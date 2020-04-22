@@ -16,14 +16,13 @@ class MemeDetailViewController: UIViewController {
     //MARK: - Outlets
     @IBOutlet weak var detailedImageView: UIImageView!
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.detailedImageView.image = currentMeme.originalImage
-    }
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+           super.viewWillAppear(animated)
+           self.detailedImageView.image = currentMeme.memedImage
+       }
 }

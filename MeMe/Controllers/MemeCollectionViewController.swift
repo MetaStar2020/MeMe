@@ -36,6 +36,8 @@ class MemeCollectionViewController: UICollectionViewController, UITextFieldDeleg
      override func viewDidLoad() {
            super.viewDidLoad()
         
+        memeCollectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
         let space:CGFloat = 3.0
         let widthDimension = (view.frame.size.width - (2 * space)) / 3.0
         //let heightDimension = (view.frame.size.height - (2 * space)) / 3.0
@@ -66,14 +68,9 @@ class MemeCollectionViewController: UICollectionViewController, UITextFieldDeleg
         
         // Configure the cell’s contents.
         cell.collectionImageView.image = self.memes[indexPath.row].originalImage
-        cell.topText.isEnabled = false
-        cell.bottomText.isEnabled = false
         setTextStyle(cell.topText, self.memes[indexPath.row].topText )
         setTextStyle(cell.bottomText, self.memes[indexPath.row].bottomText)
-        
-        //cell.topLabel.text = self.memes[indexPath.row].topText
-        //cell.bottomLabel.text = self.memes[indexPath.row].bottomText
-            
+         
         return cell
      }
     
@@ -94,14 +91,16 @@ class MemeCollectionViewController: UICollectionViewController, UITextFieldDeleg
 
    // MARK: - Setting Default Texts
    
-      func setTextStyle(_ textField: UITextField, _ defaultText: String) {
-          textField.defaultTextAttributes = memeTextAttributes
-          textField.textAlignment = NSTextAlignment.center
-          textField.backgroundColor = UIColor.clear
-          textField.delegate = self
-          textField.adjustsFontSizeToFitWidth = true
-          textField.text = defaultText
+      func setTextStyle(_ textLabel: UILabel, _ defaultText: String) {
+          textLabel.attributedText = NSAttributedString(string: defaultText, attributes: memeTextAttributes)
+          textLabel.textAlignment = NSTextAlignment.center
+          textLabel.backgroundColor = UIColor.clear
+          //textLabel.delegate = self
+          textLabel.adjustsFontSizeToFitWidth = true
+          textLabel.text = defaultText
         
       }
     
 }
+
+

@@ -132,16 +132,34 @@
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SRF-IH-66Y">
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         </imageView>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="topText" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8V7-rz-uOJ">
+                                            <rect key="frame" x="5" y="5" width="40" height="18.666666666666668"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="bottomText" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="432-h6-1tw">
+                                            <rect key="frame" x="5" y="26.333333333333329" width="40" height="18.666666666666671"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="8V7-rz-uOJ" firstAttribute="trailing" secondItem="432-h6-1tw" secondAttribute="trailing" id="2kj-xs-7ce"/>
+                                        <constraint firstAttribute="bottom" secondItem="432-h6-1tw" secondAttribute="bottom" constant="5" id="3lF-wD-KpD"/>
                                         <constraint firstItem="SRF-IH-66Y" firstAttribute="top" secondItem="Jmq-Oa-Lgd" secondAttribute="top" id="BwB-Hg-sQu"/>
+                                        <constraint firstItem="8V7-rz-uOJ" firstAttribute="leading" secondItem="432-h6-1tw" secondAttribute="leading" id="Gaa-Zp-pYg"/>
+                                        <constraint firstItem="8V7-rz-uOJ" firstAttribute="centerX" secondItem="SRF-IH-66Y" secondAttribute="centerX" id="P3x-7B-1r5"/>
                                         <constraint firstAttribute="trailing" secondItem="SRF-IH-66Y" secondAttribute="trailing" id="QKR-Sb-ShN"/>
                                         <constraint firstItem="SRF-IH-66Y" firstAttribute="leading" secondItem="Jmq-Oa-Lgd" secondAttribute="leading" id="RgA-lU-JpP"/>
+                                        <constraint firstItem="8V7-rz-uOJ" firstAttribute="top" secondItem="Jmq-Oa-Lgd" secondAttribute="top" constant="5" id="TLx-lH-njT"/>
+                                        <constraint firstItem="8V7-rz-uOJ" firstAttribute="leading" secondItem="Jmq-Oa-Lgd" secondAttribute="leading" constant="5" id="XPy-Jy-vH0"/>
                                         <constraint firstAttribute="bottom" secondItem="SRF-IH-66Y" secondAttribute="bottom" id="vIo-Dl-g9B"/>
                                     </constraints>
                                 </collectionViewCellContentView>
                                 <connections>
+                                    <outlet property="bottomText" destination="432-h6-1tw" id="HyV-Yf-LRW"/>
                                     <outlet property="collectionImageView" destination="SRF-IH-66Y" id="cIm-gR-n3I"/>
+                                    <outlet property="topText" destination="8V7-rz-uOJ" id="wLo-DT-Umq"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>

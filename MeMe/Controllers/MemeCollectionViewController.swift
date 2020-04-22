@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MemeCollectionViewController: UICollectionViewController {
+class MemeCollectionViewController: UICollectionViewController, UITextFieldDelegate {
     
     // MARK: - Properties: Variables and Constants
     
@@ -22,6 +22,14 @@ class MemeCollectionViewController: UICollectionViewController {
         let appDelegate = object as! AppDelegate
         return appDelegate.memes
     }
+    
+    //Set NSAttributes
+       let memeTextAttributes: [NSAttributedString.Key: Any] = [
+           NSAttributedString.Key.strokeColor: UIColor.black,
+           NSAttributedString.Key.foregroundColor: UIColor.white,
+           NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+           NSAttributedString.Key.strokeWidth: -3.0,
+       ]
     
     // MARK: - View Life Cycle
     
@@ -58,6 +66,13 @@ class MemeCollectionViewController: UICollectionViewController {
         
         // Configure the cell’s contents.
         cell.collectionImageView.image = self.memes[indexPath.row].originalImage
+        cell.topText.isEnabled = false
+        cell.bottomText.isEnabled = false
+        setTextStyle(cell.topText, self.memes[indexPath.row].topText )
+        setTextStyle(cell.bottomText, self.memes[indexPath.row].bottomText)
+        
+        //cell.topLabel.text = self.memes[indexPath.row].topText
+        //cell.bottomLabel.text = self.memes[indexPath.row].bottomText
             
         return cell
      }
@@ -77,16 +92,16 @@ class MemeCollectionViewController: UICollectionViewController {
            }
           }
 
+   // MARK: - Setting Default Texts
    
-/* Just to help implement later
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailedImage = memes[(indexPath as NSIndexPath).row]
+      func setTextStyle(_ textField: UITextField, _ defaultText: String) {
+          textField.defaultTextAttributes = memeTextAttributes
+          textField.textAlignment = NSTextAlignment.center
+          textField.backgroundColor = UIColor.clear
+          textField.delegate = self
+          textField.adjustsFontSizeToFitWidth = true
+          textField.text = defaultText
         
-        let memeDetailViewController = self.storyboard!.instantiateViewController(withIdentifier: "MemeDetailViewController") as! MemeDetailViewController
-        memeDetailViewController.meme = detailedImage
-        
-        self.navigationController!.pushViewController(memeDetailViewController, animated: true)
-    }*/
-    
+      }
     
 }

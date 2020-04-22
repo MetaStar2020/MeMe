@@ -57,7 +57,7 @@ class MemeCollectionViewController: UICollectionViewController {
          print(indexPath)
         
         // Configure the cell’s contents.
-        cell.collectionImageView.image = self.memes[indexPath.row].memedImage
+        cell.collectionImageView.image = self.memes[indexPath.row].originalImage
             
         return cell
      }

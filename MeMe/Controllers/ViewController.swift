@@ -8,13 +8,14 @@
 // Note: There's no need for a navigation bar -- app uses a single view and presented subviews
 //
 
+
 import UIKit
 import AVFoundation
 
 class ViewController:  UIViewController, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate, UITextFieldDelegate {
     
-    // MARK: - Variables and Constants
+    // MARK: - Outlets
     
     @IBOutlet weak var imagePickerView: UIImageView!
     @IBOutlet weak var navBar: UIToolbar!
@@ -26,7 +27,9 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var topText: UITextField!
     @IBOutlet weak var bottomText: UITextField!
-    
+ 
+    // MARK: - Properties: Variables and Constants
+/*
     //Set NSAttributes
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key.strokeColor: UIColor.black,
@@ -34,17 +37,19 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
         NSAttributedString.Key.strokeWidth: -3.0,
     ]
-    
+ */
     //Constants
     let topDefaultFieldText: String = "TOP"
     let bottomDefaultFieldText: String = "BOTTOM"
     
-    // MARK: - Views Control
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         shareButton.isEnabled = false
         setTextStyle(topText, topDefaultFieldText)
+        topText.delegate = self
         setTextStyle(bottomText, bottomDefaultFieldText)
+        bottomText.delegate = self
         
     }
     
@@ -100,8 +105,8 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    // MARK: - Setting Default Texts
- 
+    // MARK: - Default Text Style Function
+/*
     func setTextStyle(_ textField: UITextField, _ defaultText: String) {
         textField.defaultTextAttributes = memeTextAttributes
         textField.textAlignment = NSTextAlignment.center
@@ -110,16 +115,16 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         textField.adjustsFontSizeToFitWidth = true
         textField.text = defaultText
     }
-    
+ */
     
     // MARK: - UIImagePickerControllerDelegate Methods
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             imagePickerView.contentMode = .scaleAspectFit
             imagePickerView.image = pickedImage
             shareButton.isEnabled = true
         }
-        
         dismiss(animated: true, completion: nil)
     }
 
@@ -128,6 +133,7 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     }
     
     // MARK: - UIImagePickerController Actions
+    
     @IBAction func pickAnImageFromAlbum(_ sender: Any) {
         pickFromSource(.photoLibrary)
     }
@@ -145,19 +151,20 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     }
     
     // MARK: - Share and Cancel Button Actions
+    
     @IBAction func shareCurrentPhoto(_ sender: Any) {
         //Generate memedImage
        let sharedImage = generateMemedImage()
         
         //present an ActivityViewController
         let activityView = UIActivityViewController(activityItems: [sharedImage], applicationActivities: nil)
-                present(activityView, animated: true)
+            present(activityView, animated: true)
         
         //Completion Handler - saving
         activityView.completionWithItemsHandler = { activity, completed, items, error in
             if completed {
+                self.save(memedImage: sharedImage)
                 showAlert("MemeMe", "share completed")
-                self.save()
                 return
             } else {
                 showAlert("MemeMe", "share cancelled")
@@ -171,25 +178,29 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         func showAlert(_ alertTitle: String, _ alertMessage: String) {
             let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
 
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-
-            self.present(alert, animated: true)
-        }
-        
-        
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler:  nil ))
+            UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+            
+            UIApplication.shared.keyWindow?.rootViewController?.viewWillAppear(true)
+            }
     }
+    
     @IBAction func cancelCurrentMeme(_ sender: Any) {
-        // Resetting to default settings (no images and revert to custom texts)
-        self.setTextStyle(topText, topDefaultFieldText)
-        self.setTextStyle(bottomText, bottomDefaultFieldText)
+        // Removing current image and return to Sent Memes
         imagePickerView.image = nil
+        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Memory Functions
-    func save() {
+    func save(memedImage: UIImage) {
         
         // Create the meme
-        _ = Meme(topText: topText.text!, bottomText: bottomText.text!, originalImage: imagePickerView.image!, memedImage: generateMemedImage())
+        let meme = Meme(topText: topText.text!, bottomText: bottomText.text!, originalImage: imagePickerView.image!, memedImage: memedImage)
+        
+        //Add to the memes array in AppDelegate
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        appDelegate.memes.append(meme)
     }
     
     func generateMemedImage() -> UIImage {

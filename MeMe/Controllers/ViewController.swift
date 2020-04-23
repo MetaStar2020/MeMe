@@ -29,7 +29,7 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     @IBOutlet weak var bottomText: UITextField!
  
     // MARK: - Properties: Variables and Constants
-    
+/*
     //Set NSAttributes
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key.strokeColor: UIColor.black,
@@ -37,7 +37,7 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
         NSAttributedString.Key.strokeWidth: -3.0,
     ]
-    
+ */
     //Constants
     let topDefaultFieldText: String = "TOP"
     let bottomDefaultFieldText: String = "BOTTOM"
@@ -47,7 +47,9 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         super.viewDidLoad()
         shareButton.isEnabled = false
         setTextStyle(topText, topDefaultFieldText)
+        topText.delegate = self
         setTextStyle(bottomText, bottomDefaultFieldText)
+        bottomText.delegate = self
         
     }
     
@@ -68,16 +70,6 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         textField.resignFirstResponder()
         return true;
     }
-    
-    // MARK: - Navigation
-    
-       /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-           // Get the new view controller using segue.destination.
-        let destVC : SentMemesVC = segue.destination as! SentMemesVC
-           // Pass the selected object to the new view controller. -- IMPLEMENTATION NEEDED!
-        destVC.delegate = self
-       }*/
-       
     
     // MARK: - Keyboard Settings
     @objc func keyboardWillShow(_ notification: Notification) {
@@ -113,8 +105,8 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    // MARK: - Setting Default Texts
- 
+    // MARK: - Default Text Style Function
+/*
     func setTextStyle(_ textField: UITextField, _ defaultText: String) {
         textField.defaultTextAttributes = memeTextAttributes
         textField.textAlignment = NSTextAlignment.center
@@ -123,16 +115,16 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         textField.adjustsFontSizeToFitWidth = true
         textField.text = defaultText
     }
-    
+ */
     
     // MARK: - UIImagePickerControllerDelegate Methods
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             imagePickerView.contentMode = .scaleAspectFit
             imagePickerView.image = pickedImage
             shareButton.isEnabled = true
         }
-        
         dismiss(animated: true, completion: nil)
     }
 
@@ -141,6 +133,7 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     }
     
     // MARK: - UIImagePickerController Actions
+    
     @IBAction func pickAnImageFromAlbum(_ sender: Any) {
         pickFromSource(.photoLibrary)
     }
@@ -158,6 +151,7 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     }
     
     // MARK: - Share and Cancel Button Actions
+    
     @IBAction func shareCurrentPhoto(_ sender: Any) {
         //Generate memedImage
        let sharedImage = generateMemedImage()
@@ -190,6 +184,7 @@ UINavigationControllerDelegate, UITextFieldDelegate {
             UIApplication.shared.keyWindow?.rootViewController?.viewWillAppear(true)
             }
     }
+    
     @IBAction func cancelCurrentMeme(_ sender: Any) {
         // Removing current image and return to Sent Memes
         imagePickerView.image = nil

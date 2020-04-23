@@ -22,7 +22,8 @@ class MemeCollectionViewController: UICollectionViewController, UITextFieldDeleg
         let appDelegate = object as! AppDelegate
         return appDelegate.memes
     }
-    
+
+    /*
     //Set NSAttributes
        let memeTextAttributes: [NSAttributedString.Key: Any] = [
            NSAttributedString.Key.strokeColor: UIColor.black,
@@ -30,17 +31,17 @@ class MemeCollectionViewController: UICollectionViewController, UITextFieldDeleg
            NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
            NSAttributedString.Key.strokeWidth: -3.0,
        ]
-    
+   */
     // MARK: - View Life Cycle
     
      override func viewDidLoad() {
            super.viewDidLoad()
         
+        //Storyboard autoresizing doesnt work properly without this.
         memeCollectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         let space:CGFloat = 3.0
         let widthDimension = (view.frame.size.width - (2 * space)) / 3.0
-        //let heightDimension = (view.frame.size.height - (2 * space)) / 3.0
 
         flowLayout.minimumInteritemSpacing = space
         flowLayout.minimumLineSpacing = space
@@ -74,23 +75,24 @@ class MemeCollectionViewController: UICollectionViewController, UITextFieldDeleg
         return cell
      }
     
-    // Prepare for Segue from selected Item
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-           self.performSegue(withIdentifier: "segueCollectionVCtoDetailVC", sender: self)
-       }
     // MARK: - Navigation
+    
+    // Send for Segue from selected Item
+       override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+              self.performSegue(withIdentifier: "segueCollectionVCtoDetailVC", sender: self)
+          }
 
-          // In a storyboard-based application, you will often want to do a little preparation before navigation
-          override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-           if (segue.identifier == "segueCollectionVCtoDetailVC") {
+    // Prepare for Segue from selected Item
+        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            if (segue.identifier == "segueCollectionVCtoDetailVC") {
                let destVC: MemeDetailViewController = segue.destination as! MemeDetailViewController
             let indexPath = self.memeCollectionView.indexPathsForSelectedItems?.first
                destVC.currentMeme = self.memes[indexPath!.row]
            }
-          }
+        }
 
-   // MARK: - Setting Default Texts
-   
+   // MARK: - Default Text Style Function
+/*
       func setTextStyle(_ textLabel: UILabel, _ defaultText: String) {
           textLabel.attributedText = NSAttributedString(string: defaultText, attributes: memeTextAttributes)
           textLabel.textAlignment = NSTextAlignment.center
@@ -100,7 +102,7 @@ class MemeCollectionViewController: UICollectionViewController, UITextFieldDeleg
           textLabel.text = defaultText
         
       }
-    
+*/
 }
 
 
